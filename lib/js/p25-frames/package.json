@@ -1,0 +1,11 @@
+{
+  "name": "p25-frames",
+  "description": "p25 frame parsing",
+  "version": "0.0.1",
+  "main": "index.js",
+  "dependencies": {
+    "bitwise": "^1.4.1",
+    "binary-parser": "^1.3.2"
+  },
+  "devDependencies": {}
+}

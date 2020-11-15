@@ -1,0 +1,16 @@
+{
+  "name": "golay-23-11-7",
+  "description": "Golay(23,11,7) decoder",
+  "version": "0.0.1",
+  "main": "index.js",
+  "dependencies": {
+    "big-integer": "^1.6.36"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "golay",
+    "fec",
+    "ecc"
+  ],
+  "license": "GPL-3.0"
+}

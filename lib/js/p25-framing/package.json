@@ -1,0 +1,11 @@
+{
+  "name": "p25-framing",
+  "description": "p25 framing for pull-streams",
+  "version": "0.0.1",
+  "main": "index.js",
+  "dependencies": {
+    "bitwise": "^1.4.1",
+    "pull-through": "^1.0.18"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,10 @@
+{
+  "name": "pull-byte-to-dibits",
+  "description": "transform a stream of bytes into a stream of dibits.",
+  "version": "0.0.1",
+  "main": "index.js",
+  "dependencies": {
+    "pull-flatmap": "^0.0.1"
+  },
+  "devDependencies": {}
+}

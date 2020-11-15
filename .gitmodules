@@ -1,0 +1,27 @@
+[submodule "lib/c/dsd"]
+	path = lib/c/dsd
+	url = https://github.com/rhodey/dsd
+[submodule "lib/c/itpp"]
+	path = lib/c/itpp
+	url = https://github.com/rhodey/itpp
+[submodule "lib/c/mbelib"]
+	path = lib/c/mbelib
+	url = https://github.com/rhodey/mbelib
+[submodule "lib/c/usbreset"]
+	path = lib/c/usbreset
+	url = https://github.com/rhodey/usbreset
+[submodule "lib/c/librtlsdr"]
+	path = lib/c/librtlsdr
+	url = https://github.com/rhodey/librtlsdr
+[submodule "lib/c/liquid-dsp"]
+	path = lib/c/liquid-dsp
+	url = https://github.com/rhodey/liquid-dsp
+[submodule "lib/rs/rtl_rs"]
+	path = lib/rs/rtl_rs
+	url = https://github.com/rhodey/rtl_rs
+[submodule "lib/rs/rtl_p25"]
+	path = lib/rs/rtl_p25
+	url = https://github.com/rhodey/rtl_p25
+[submodule "lib/c/librtlsdr-docker"]
+	path = lib/c/librtlsdr-docker
+	url = https://github.com/rhodey/librtlsdr-docker

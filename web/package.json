@@ -1,0 +1,37 @@
+{
+  "name": "rw-web",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "bankai build index.js",
+    "create": "choo-scaffold",
+    "inspect": "bankai inspect index.js",
+    "start": "bankai start index.js",
+    "test": "standard && npm run test-deps",
+    "test-deps": "dependency-check . && dependency-check . --extra --no-dev -i tachyons"
+  },
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "codecs": "^1.2.1",
+    "choo": "^6.13.1",
+    "choo-service-worker": "^2.4.0",
+    "sheetify": "^7.3.3",
+    "tachyons": "^4.11.1",
+    "marli": "^2.0.0",
+    "random-access-memory": "^3.0.0",
+    "dat-encoding": "^5.0.1",
+    "hypercore": "^9.6.0",
+    "hyperdb": "^3.5.0",
+    "websocket-stream": "^5.5.0",
+    "moment": "^2.24.0",
+    "howler": "^2.1.1",
+    "d3": "^5.9.7"
+  },
+  "devDependencies": {
+    "bankai": "^9.15.0",
+    "choo-devtools": "^2.5.1",
+    "choo-scaffold": "^1.2.0",
+    "dependency-check": "^3.2.1",
+    "standard": "^12.0.1"
+  }
+}

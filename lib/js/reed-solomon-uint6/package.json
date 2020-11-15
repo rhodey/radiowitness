@@ -1,0 +1,8 @@
+{
+  "name": "reed-solomon-uint6",
+  "description": "Foundation for constructing Reed-Solomon decoders that operate on 6bit words",
+  "version": "0.0.1",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {}
+}

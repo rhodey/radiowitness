@@ -1,0 +1,10 @@
+{
+  "name": "bch-63-16-23",
+  "description": "BCH(63,16,23) decoder",
+  "version": "0.0.1",
+  "main": "index.js",
+  "dependencies": {
+    "bitwise": "^1.4.1"
+  },
+  "devDependencies": {}
+}

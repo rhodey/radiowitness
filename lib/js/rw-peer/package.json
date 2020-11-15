@@ -1,0 +1,24 @@
+{
+  "name": "rw-peer",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "mkdirp": "^1.0.4",
+    "split": "^1.0.1",
+    "stream-to-pull-stream": "^1.7.2",
+    "pull-stream": "^3.6.2",
+    "pull-through": "^1.0.18",
+    "pull-flatmap": "^0.0.1",
+    "pull-timeout2": "^0.0.2",
+    "pull-abortable": "^4.1.1",
+    "codecs": "^1.2.1",
+    "dat-encoding": "^5.0.1",
+    "hypercore": "^9.6.0",
+    "hyperdb": "^3.5.0",
+    "websocket-stream": "^5.5.0",
+    "hyperdiscovery": "^8.0.0"
+  },
+  "devDependencies": {}
+}

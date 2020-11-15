@@ -1,0 +1,11 @@
+{
+  "name": "pull-dibit-syncword",
+  "description": "insert a sync event into a stream of dibits every time a syncword is read completely.",
+  "version": "0.0.4",
+  "main": "index.js",
+  "dependencies": {
+    "big-integer": "^1.6.36",
+    "pull-through": "^1.0.18"
+  },
+  "devDependencies": {}
+}

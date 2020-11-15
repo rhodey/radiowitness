@@ -1,0 +1,8 @@
+{
+  "name": "berlekamp-massey-63",
+  "description": "Berlekemp Massey decoder for 63-bit primitive RS/BCH block codes",
+  "version": "0.0.1",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {}
+}

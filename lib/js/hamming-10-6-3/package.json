@@ -1,0 +1,8 @@
+{
+  "name": "hamming-10-6-3",
+  "description": "hamming(10,6,3) decoder",
+  "version": "0.0.1",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {}
+}

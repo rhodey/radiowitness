@@ -1,0 +1,10 @@
+{
+  "name": "trellis-196-96",
+  "description": "trellis half-rate decoder: 196b in, 96b out",
+  "version": "0.0.1",
+  "main": "index.js",
+  "dependencies": {
+    "big-integer": "^1.6.36"
+  },
+  "devDependencies": {}
+}

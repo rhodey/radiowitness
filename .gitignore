@@ -1,0 +1,8 @@
+README.html
+.channels
+*\.swp
+
+web/config.json
+web/package-lock.json
+web/node_modules
+web/dist
