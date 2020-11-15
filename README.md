@@ -47,7 +47,7 @@ $ docker run $(./bin/rtl_devices.sh) --rm \
 ```
 
 ### Multi-Host
-Archive P25 decode stream from TCP port `1234` and replicate archive over WebSockets TCP port `8081`. `--limit 1000000` will limit the archive to the most recent one million calls and use storage approximate to **16kb/sec** for recorded audio. One million ten second calls works out to **160GB**:
+Archive P25 decode stream from TCP port `1234` and replicate archive over WebSockets TCP port `8081`. `--limit 1000000` will limit the archive to the most recent one million calls and use storage approximate to **16kB/sec** for recorded audio. One million ten second calls works out to **16GB**:
 ```
 $ ncat -l -k -p 1234 -c \
     "docker run --rm -i --name vpn.archive-p25 -v /tmp/archive-p25:/archive -p 8081:8081 \
