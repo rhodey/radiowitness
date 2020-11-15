@@ -25,3 +25,6 @@
 [submodule "lib/c/librtlsdr-docker"]
 	path = lib/c/librtlsdr-docker
 	url = https://github.com/rhodey/librtlsdr-docker
+[submodule "lib/js/multi-random-access"]
+	path = lib/js/multi-random-access
+	url = https://github.com/rhodey/multi-random-access

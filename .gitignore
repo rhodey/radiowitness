@@ -1,8 +1,12 @@
+notes
 README.html
 .channels
 *\.swp
 
-web/config.json
-web/package-lock.json
+lib/js/rw-peer/node_modules
+lib/js/rw-peer/package-lock.json
+
 web/node_modules
+web/package-lock.json
+web/config.json
 web/dist
