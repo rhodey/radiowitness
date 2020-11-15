@@ -1,21 +1,25 @@
 [submodule "lib/c/dsd"]
 	path = lib/c/dsd
 	url = https://github.com/rhodey/dsd
+	branch = rw
 [submodule "lib/c/itpp"]
 	path = lib/c/itpp
 	url = https://github.com/rhodey/itpp
 [submodule "lib/c/mbelib"]
 	path = lib/c/mbelib
 	url = https://github.com/rhodey/mbelib
+	branch = rw
 [submodule "lib/c/usbreset"]
 	path = lib/c/usbreset
 	url = https://github.com/rhodey/usbreset
 [submodule "lib/c/librtlsdr"]
 	path = lib/c/librtlsdr
 	url = https://github.com/rhodey/librtlsdr
+	branch = rw
 [submodule "lib/c/liquid-dsp"]
 	path = lib/c/liquid-dsp
 	url = https://github.com/rhodey/liquid-dsp
+	branch = rw
 [submodule "lib/rs/rtl_rs"]
 	path = lib/rs/rtl_rs
 	url = https://github.com/rhodey/rtl_rs
@@ -28,3 +32,4 @@
 [submodule "lib/js/multi-random-access"]
 	path = lib/js/multi-random-access
 	url = https://github.com/rhodey/multi-random-access
+	branch = sunshine
