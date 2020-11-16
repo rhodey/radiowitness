@@ -32,4 +32,4 @@
 [submodule "lib/js/multi-random-access"]
 	path = lib/js/multi-random-access
 	url = https://github.com/rhodey/multi-random-access
-	branch = sunshine
+	branch = workaround
