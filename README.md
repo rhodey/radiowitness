@@ -66,7 +66,7 @@ Run a mirror if you want to add storage to your archive or mirror someone else. 
 ```
 $ docker run -d --name vpn.mirror-p25 \
     -v /tmp/mirror-p25:/archive -p 8081:8081 \
-      radiowitness mirror vpn.archive-p25:8081 --limit 2000000
+      radiowitness mirror ws://vpn.archive-p25:8081 --limit 2000000
 ```
 
 ## Web App
@@ -75,8 +75,8 @@ $ curl http://vpn.archive-p25:8081/dat.json \
     | docker run --rm -i radiowitness config \
         --title "Radio Venceremos" \
         --description "Austin Texas police and fire radio." \
-        --host vpn.archive-p25:8081 \
-        --host vpn.mirror-p25:8081 > web/config.json
+        --host ws://vpn.archive-p25:8081 \
+        --host ws://vpn.mirror-p25:8081 > web/config.json
 $ cd web/ && npm install && npm run build
 $ cd dist/ && python -m SimpleHTTPServer 8080
 ```
