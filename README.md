@@ -38,7 +38,7 @@ $ docker run --rm -v /tmp/archive-p25:/archive \
 ```
 
 ## Decode and Archive
-The following example will decode, archive and replicate from directory tree `/tmp/archive-p25` using WebSockets on TCP port `8081`:
+The following example will decode, archive and replicate from directory tree `/tmp/archive-p25` and serve the web app and mirrors using WebSockets on TCP port `8081`:
 ```
 $ docker run $(./bin/rtl_devices.sh) --rm \
     radiowitness decode p25 --radios 3 --mux 2 -s 1200000 -g 26 -f 851137500 \
@@ -47,7 +47,7 @@ $ docker run $(./bin/rtl_devices.sh) --rm \
 ```
 
 ### Multi-Host
-Archive P25 decode stream from TCP port `1234` and replicate archive over WebSockets TCP port `8081` (used by web app & mirrors). `--limit 1000000` will limit the archive to the most recent one million calls and use storage approximate to **16KB/sec** for recorded audio. One million ten second radio calls is **160GB** of audio:
+Archive P25 decode stream from TCP port `1234` and replicate archive over WebSockets TCP port `8081`. `--limit 1000000` will limit the archive to the most recent one million calls and use storage approximate to **16KB/sec** for recorded audio. One million ten second radio calls is **160GB** of audio:
 ```
 $ ncat -l -k -p 1234 -c \
     "docker run --rm -i --name vpn.archive-p25 -v /tmp/archive-p25:/archive -p 8081:8081 \
