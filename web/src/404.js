@@ -1,5 +1,6 @@
 const html = require('choo/html')
 const TITLE = 'RadioWitness - 404'
+
 module.exports = view
 
 function view (state, emit) {

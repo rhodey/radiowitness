@@ -3,35 +3,26 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build": "bankai build index.js",
-    "create": "choo-scaffold",
-    "inspect": "bankai inspect index.js",
-    "start": "bankai start index.js",
-    "test": "standard && npm run test-deps",
-    "test-deps": "dependency-check . && dependency-check . --extra --no-dev -i tachyons"
+    "build": "browserify src/index.js -o dist/bundle.js",
+    "watch": "watchify src/index.js -o 'exorcist dist/bundle.js.map > dist/bundle.js' -dv"
   },
   "dependencies": {
-    "minimist": "^1.2.0",
-    "codecs": "^1.2.1",
-    "choo": "^7.1.0",
-    "choo-service-worker": "^3.0.0",
-    "sheetify": "^8.0.0",
-    "tachyons": "^4.11.1",
-    "marli": "^2.0.0",
-    "random-access-memory": "^3.1.1",
+    "minimist": "1.2.0",
+    "codecs": "1.2.1",
+    "choo": "7.1.0",
+    "sheetify": "8.0.0",
+    "random-access-memory": "3.1.1",
     "hypercore-crypto": "2.1.0",
-    "hypercore": "^9.6.0",
-    "hyperdb": "^3.5.0",
-    "websocket-stream": "^5.5.0",
-    "howler": "^2.1.1",
-    "d3": "^5.9.7"
+    "hypercore": "9.6.0",
+    "hyperdb": "3.5.0",
+    "websocket-stream": "5.5.0",
+    "howler": "2.1.1",
+    "d3": "5.9.7"
   },
   "devDependencies": {
-    "bankai": "^9.15.3",
     "choo-devtools": "^3.0.4",
-    "choo-scaffold": "^1.2.0",
-    "dependency-check": "^3.2.1",
-    "standard": "^12.0.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0"
+    "browserify": "17.0.0",
+    "exorcist": "1.0.1",
+    "watchify": "3.11.1"
   }
 }
