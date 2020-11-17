@@ -10,7 +10,7 @@ $ docker build -t usbreset lib/c/usbreset
 ```
 
 ## Search for Radio Networks
-Using the [Radio Reference Database](https://www.radioreference.com/apps/db/) find your local county and search the county page for **"Project 25 Phase I"**, for example Austin Texas has the [Greater Austin/Travis Regional Radio System](https://www.radioreference.com/apps/db/?sid=2). If your county has a P25 Phase 1 network there will be a table labeled **"System Frequencies"** and running behind one or more of these frequencies should be a P25 [Control Channel](https://wiki.radioreference.com/index.php/Control_channel). The following example uses `-g` for radio gain and it is shown that frequency `851137500Hz` has the best reception of three control channel candidates:
+Using the [Radio Reference Database](https://www.radioreference.com/apps/db/) find your local county and search the county page for **"Project 25 Phase I"**, for example Austin, Texas has the [Greater Austin/Travis Regional Radio System](https://www.radioreference.com/apps/db/?sid=2). If your county has a P25 Phase 1 network there will be a table labeled **"System Frequencies"** and running behind one or more of these frequencies should be a P25 [Control Channel](https://wiki.radioreference.com/index.php/Control_channel). The following example uses `-g` for radio gain and it is shown that frequency `851137500Hz` has the best reception of three control channel candidates:
 ```
 $ chmod +x ./bin/rtl_devices.sh
 $ docker run $(./bin/rtl_devices.sh) --rm \
@@ -47,7 +47,7 @@ $ docker run $(./bin/rtl_devices.sh) --rm \
 ```
 
 ### Multi-Host
-Archive P25 decode stream from TCP port `1234` and replicate archive over WebSockets TCP port `8081`. `--limit 1000000` will limit the archive to the most recent one million calls and use storage approximate to **16KB/sec** for recorded audio. One million ten second calls is **160GB** of audio:
+Archive P25 decode stream from TCP port `1234` and replicate archive over WebSockets TCP port `8081` (used by web app & mirrors). `--limit 1000000` will limit the archive to the most recent one million calls and use storage approximate to **16KB/sec** for recorded audio. One million ten second radio calls is **160GB** of audio:
 ```
 $ ncat -l -k -p 1234 -c \
     "docker run --rm -i --name vpn.archive-p25 -v /tmp/archive-p25:/archive -p 8081:8081 \
@@ -70,12 +70,12 @@ $ docker run -d --name vpn.mirror-p25 \
 ```
 
 ## Web App
+The web app must be configured to reference an archive or mirror, then serve the `web/dist` directory using whatever HTTP server you like. An archive for Austin, Texas is kept online at [atx.radiowitness.org](http://atx.radiowitness.org), the following example would serve from [localhost:8080](http://localhost:8080):
 ```
-$ curl http://vpn.archive-p25:8081/dat.json \
+$ curl http://vpn.mirror-p25:8081/dat.json \
     | docker run --rm -i radiowitness config \
         --title "Radio Venceremos" \
         --description "Austin Texas police and fire radio." \
-        --host ws://vpn.archive-p25:8081 \
         --host ws://vpn.mirror-p25:8081 > web/config.json
 $ cd web/ && npm install && npm run build
 $ cd dist/ && python -m SimpleHTTPServer 8080
