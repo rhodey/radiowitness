@@ -56,7 +56,7 @@ $ ncat -l -k -p 1234 -c \
 
 Decode with connectivity to `vpn.archive-p25` TCP port `1234`:
 ```
-$ time ncat vpn.archive-p25 1234 -c \
+$ ncat vpn.archive-p25 1234 -c \
     "docker run $(./bin/rtl_devices.sh) --rm \
       radiowitness decode p25 --radios 3 --mux 2 -s 1200000 -g 26 -f 851137500"
 ```
