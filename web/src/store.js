@@ -79,10 +79,13 @@ function store(state, emitter) {
       .catch(console.error)
   })
 
-  state.delay = 0
+  state.delay = -1
   state.available = 0
 
   emitter.on('radio:listen', function () {
+    if (state.delay >= 0) { return }
+    state.delay = 0
+
     const opts = { start: state.audio.remoteLength - 1, tail: true, live: true }
     const read = state.audio.createReadStream(opts)
 
