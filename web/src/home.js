@@ -10,17 +10,23 @@ function view (state, emit) {
   }
 
   function listen() {
-    if (state.available > 0) {
-      emit('radio:listen')
-    }
+    emit('radio:listen')
   }
 
-  const listenText = state.available > 0 ? 'LISTEN!' : 'LOADING...'
+  var button
+  if (!state.listening && state.first === null) {
+    button = html`<button>loading...</button>`
+  } else if (!state.listening && state.first !== null) {
+    button = html`<button onclick=${listen}>listen!</button>`
+  } else if (state.listening && state.waiting) {
+    button = html`<button>silence...</button>`
+  } else {
+    button = html`<button>blah blah blah</button>`
+  }
 
   return html`<body>
     <h2>${conf.title}</h2>
     <p>${conf.description}</p>
-    <p>Radio calls available: ${state.available}</p>
-    <button onclick=${listen}>${listenText}</button>
+    ${button}
   </body>`
 }

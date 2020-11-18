@@ -15,7 +15,7 @@
     "hypercore": "9.6.0",
     "hyperdb": "3.5.0",
     "websocket-stream": "5.5.0",
-    "howler": "2.1.1",
+    "howler": "2.2.1",
     "d3": "5.9.7"
   },
   "devDependencies": {

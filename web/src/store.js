@@ -6,12 +6,16 @@ const websocket = require('websocket-stream')
 const howler    = require('howler')
 const conf      = require('../config.json')
 
+function isDb(archive) {
+  return archive.authorize !== undefined
+}
+
 function get(archive, idx) {
   return new Promise(function (res, rej) {
     archive.get(idx, function (err, data) {
       if (err) {
         rej(err)
-      } else if (archive.authorize !== undefined) {
+      } else if (isDb(archive)) {
         res(codec.decode(data[0].value))
       } else {
         res(data)
@@ -20,13 +24,13 @@ function get(archive, idx) {
   })
 }
 
-function ws(archive, path) {
+function ws(archive) {
   return new Promise(function (res, rej) {
-    const ws = websocket(`${conf.host}/ws/${path}`)
+    const path = isDb(archive) ? 'ws/db' : 'ws/audio'
+    const ws = websocket(`${conf.host}/${path}`)
     ws.on('error', rej)
     ws.once('connect', function () {
-      const repl = path === 'db' ? archive.replicate({ live: true }) : archive.replicate(true, { live: true })
-      console.log('!!! ws.conn')
+      const repl = isDb(archive) ? archive.replicate({ live: true }) : archive.replicate(true, { live: true })
       repl.pipe(ws).pipe(repl)
       repl.on('error', function (err) {
         console.error('!!! repl.err', err)
@@ -41,11 +45,12 @@ function dataUri(buf) {
   return `data:audio/wav;base64,${b64}`
 }
 
-const howlLoadError = (id, err) => { console.log('QQQ on load error ->', id, err) }
-const howlPlayError = (id, err) => { console.log('QQQ on play error ->', id, err) }
+const howlLoadError = (id, err) => { console.error(`on load error ${id}`, err) }
+const howlPlayError = (id, err) => { console.error(`on play error ${id}`, err) }
 
-function howlFor(buf, autoplay) {
-  return new howler.Howl({
+function howlFor(idx, buf, autoplay) {
+  const duration = Math.floor((buf.length - 44) / 16)
+  const howl = new howler.Howl({
     src         : [dataUri(buf)],
     format      : ["wav"],
     html5       : true,
@@ -53,6 +58,7 @@ function howlFor(buf, autoplay) {
     onplayerror : howlPlayError,
     autoplay
   })
+  return { idx, duration, howl }
 }
 
 function store(state, emitter) {
@@ -72,44 +78,45 @@ function store(state, emitter) {
   emitter.on('dat:open', function (dats) {
     state.db = dats[0]
     state.audio = dats[1]
-    return Promise.all([ws(state.db, 'db'), ws(state.audio, 'audio')])
+    return Promise.all([ws(state.db), ws(state.audio)])
       .then(() => get(state.audio, 0))
       .then(() => get(state.db, '/about'))
       .then(() => emitter.emit('dat:ready'))
       .catch(console.error)
   })
 
-  state.delay = -1
-  state.available = 0
-
-  emitter.on('radio:listen', function () {
-    if (state.delay >= 0) { return }
-    state.delay = 0
-
-    const opts = { start: state.audio.remoteLength - 1, tail: true, live: true }
-    const read = state.audio.createReadStream(opts)
-
-    console.log('streaming...')
-    read.on('data', function (buf) {
-      state.available = state.audio.remoteLength
+  state.first = null
+  emitter.on('dat:ready', function () {
+    const start = state.audio.remoteLength - 1
+    get(state.audio, start).then(function (buf) {
+      state.first = howlFor(start, buf, false)
       emitter.emit(state.events.RENDER)
-      const lengthms = Math.floor((buf.length - 44) / 16)
-
-      if (state.delay === 0) {
-        howlFor(buf, true)
-        state.delay = Date.now() + lengthms
-      } else {
-        const howl = howlFor(buf, false)
-        state.delay = Math.max(0, state.delay - Date.now())
-        setTimeout(() => howl.play(), state.delay)
-        state.delay = Date.now() + state.delay + lengthms
-      }
-    })
+    }).catch(console.error)
   })
 
-  emitter.on('dat:ready', function () {
-    state.available = state.audio.remoteLength
+  state.listening = false
+  emitter.on('radio:listen', function () {
+    const first = state.first
+    state.first = null
+    state.listening = true
+
+    first.howl.play()
+    setTimeout(() => emitter.emit('audio:next', first.idx + 1), first.duration)
     emitter.emit(state.events.RENDER)
+  })
+
+  state.waiting = false
+  emitter.on('audio:next', function (idx) {
+    state.waiting = true
+    emitter.emit(state.events.RENDER)
+    state.audio.update(idx + 1, function () {
+      get(state.audio, idx).then(function (buf) {
+        state.waiting = false
+        const next = howlFor(idx, buf, true)
+        setTimeout(() => emitter.emit('audio:next', next.idx + 1), next.duration)
+        emitter.emit(state.events.RENDER)
+      }).catch(console.error)
+    })
   })
 }
 
