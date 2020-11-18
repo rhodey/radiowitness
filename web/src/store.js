@@ -22,7 +22,7 @@ function get(archive, idx) {
 
 function ws(archive, path) {
   return new Promise(function (res, rej) {
-    const ws = websocket(`${conf.host}/${path}`)
+    const ws = websocket(`${conf.host}/ws/${path}`)
     ws.on('error', rej)
     ws.once('connect', function () {
       const repl = path === 'db' ? archive.replicate({ live: true }) : archive.replicate(true, { live: true })
