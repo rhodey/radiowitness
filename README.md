@@ -70,7 +70,7 @@ $ docker run -d --name vpn.mirror-p25 \
 ```
 
 ## Web App
-The web app must be configured to reference an archive or mirror, then serve the `web/dist` directory using whatever HTTP server you like. An archive for Austin, Texas is kept online at [atx.radiowitness.org](http://atx.radiowitness.org), the following example would serve from [localhost:8080](http://localhost:8080):
+The web app must be configured to reference an archive or mirror, then serve the `web/dist` directory using whatever HTTP server you like. The following example would serve from [localhost:8080](http://localhost:8080):
 ```
 $ curl http://vpn.mirror-p25:8081/dat.json \
     | docker run --rm -i radiowitness config \
