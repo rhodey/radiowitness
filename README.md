@@ -82,4 +82,6 @@ $ cd dist/ && python -m SimpleHTTPServer 8080
 ```
 
 ## License
-License Zero Reciprocal Public License 2.0.1
+Copyright 2020 Rhodey Orbits <rhodey@anhonesteffort.org>
+Creative Commons Attribution-NonCommercial
+https://creativecommons.org/licenses/by-nc/4.0
