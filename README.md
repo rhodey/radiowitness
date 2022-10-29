@@ -23,7 +23,7 @@ $ docker run $(./bin/rtl_devices.sh) --rm \
 ## Decode and Play
 The following example shows options for `3` RTLSDR radios multiplexed by `2` to support five concurrent radio calls, this is six minus one for the `-f 851137500` control channel. Sample rate `-s 1200000` is chosen because it divides evenly by the P25 channel rate `48000` making for efficient [resampling](https://dspguru.com/dsp/faqs/multirate/resampling/). Gain `-g 0` is automatic gain control but it is recommended that a static value be found using the search command:
 ```
-$ docker run $(./bin/rtl_devices.sh) --rm \
+$ docker run $(./bin/rtl_devices.sh) --rm -i \
     radiowitness decode p25 --radios 3 --mux 2 -s 1200000 -g 0 -f 851137500 \
       | docker run --rm -i radiowitness play p25 \
         | play -t raw -b 16 -e signed -r 8k -c 1 -
@@ -40,7 +40,7 @@ $ docker run --rm -v /tmp/archive-p25:/archive \
 ## Decode and Archive
 The following example will decode, archive and replicate from directory tree `/tmp/archive-p25` and serve the web app and mirrors using WebSockets on TCP port `8081`:
 ```
-$ docker run $(./bin/rtl_devices.sh) --rm \
+$ docker run $(./bin/rtl_devices.sh) --rm -i \
     radiowitness decode p25 --radios 3 --mux 2 -s 1200000 -g 26 -f 851137500 \
       | docker run -i -v /tmp/archive-p25:/archive -p 8081:8081 \
           radiowitness archive p25
@@ -57,7 +57,7 @@ $ ncat -l -k -p 1234 -c \
 Decode with connectivity to `vpn.archive-p25` TCP port `1234`:
 ```
 $ ncat vpn.archive-p25 1234 -c \
-    "docker run $(./bin/rtl_devices.sh) --rm \
+    "docker run $(./bin/rtl_devices.sh) --rm -i \
       radiowitness decode p25 --radios 3 --mux 2 -s 1200000 -g 26 -f 851137500"
 ```
 
